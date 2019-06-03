@@ -146,7 +146,10 @@ const queryFirebase = async (deviceId) => {
   };
 }
 const queryDevice = async (deviceId) => {
-  const data = await queryFirebase(deviceId);
+  //const data = await queryFirebase(deviceId);
+  const snapshot = await firebaseRef.child(deviceId).once('value');
+  const data = snapshot.val();
+  
   return {
     on: data.on,
     isPaused: data.isPaused,
